@@ -1,0 +1,35 @@
+<div class="row mx-2 my-5">
+  <div class="col-5 mx-1 position-relative px-2 py-4 border border-1 rounded-2">
+    <h3 class="position-absolute bg-white top-0 start-50 translate-middle px-2 border border-1 rounded">Dispute Info</h3>
+    <div class="d-flex">
+      <label>Dispute Id: </label>
+      <p>{{currDispute["dispute_ID"] }}</p>
+    </div>
+    <div class="d-flex">
+      <label>Pan: </label>
+      <p>{{currDispute["pan"] }}</p>
+    </div>
+    <div class="d-flex">
+      <label>Auth Id: </label>
+      <p>{{currDispute["auth_ID"] }}</p>
+    </div>
+    
+  </div>
+ <div class="col-5 mx-1 position-relative px-2 py-4 border border-1 rounded-2">
+    <h3 class="position-absolute bg-white top-0 start-50 translate-middle px-2 border border-1 rounded">Incoming Info</h3>
+    <div class="d-flex">
+      <label>Amount: </label>
+      <p>{{currDispute["amount"] }}</p>
+    </div>
+    <div class="d-flex">
+      <label>DISPUTE_DATE: </label>
+      <p>{{currDispute["DISPUTE_DATE"] }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- <td>{{ currDispute["dispute_ID"] }}</td>
+      <td>{{ currDispute["pan"] }}</td>
+      <td>{{ currDispute["auth_ID"] }}</td>
+      <td>{{ currDispute["amount"] }}</td>
+      <td>{{ currDispute["DISPUTE_DATE"] }}</td> -->

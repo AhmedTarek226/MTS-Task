@@ -1,0 +1,227 @@
+<!-- <div class="row mx-3 my-2">
+  <input class="col-10 rounded-3" placeholder="Search" />
+  <app-create-dispute class="col-2"></app-create-dispute>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Dispute ID</th>
+      <th scope="col">Pan</th>
+      <th scope="col">auth_ID</th>
+      <th scope="col">amount</th>
+      <th scope="col">dispute_DATE</th>
+      <th scope="col">Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of disputes; index as i">
+      <th scope="row">{{ i }}</th>
+      <td>{{ item["dispute_ID"] }}</td>
+      <td>{{ item["pan"] }}</td>
+      <td>{{ item["auth_ID"] }}</td>
+      <td>{{ item["amount"] }}</td>
+      <td>{{ item["DISPUTE_DATE"] }}</td>
+      <td>
+        <a
+          role="button"
+          class="btn btn-secondary"
+          [routerLink]="['/Dispute', item['dispute_ID']]"
+          >View Dispute</a
+        >
+      </td>
+    </tr>
+  </tbody>
+</table> -->
+
+<!-- <span class="p-float-label my-4">
+  <input id="search" type="text" [(ngModel)] = "search" pInputText/>
+  <label for="some-text">Seach</label>
+</span>
+<br>
+<p-button label="Save" (onClick)="upper()"></p-button>
+<button pButton type="button" label="Save"  (click)="upper()"></button>
+<p>{{search}}</p> -->
+
+<!-- 
+<p-table
+  [value]="disputes"
+  [paginator]="true"
+  [rows]="5"
+  [showCurrentPageReport]="true"
+  styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [rowsPerPageOptions]="[5,10, 25, 50]"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="dispute_ID" scope="col">Dispute ID <p-sortIcon field="dispute_ID"></p-sortIcon></th>
+      <th pSortableColumn="pan" scope="col">PAN <p-sortIcon field="pan"></p-sortIcon></th>
+      <th pSortableColumn="auth_ID" scope="col">Auth ID <p-sortIcon field="auth_ID"></p-sortIcon></th>
+      <th pSortableColumn="amount" scope="col">Amount <p-sortIcon field="amount"></p-sortIcon></th>
+      <th pSortableColumn="dispute_DATE" scope="col">Dispute Date <p-sortIcon field="dispute_DATE"></p-sortIcon></th>
+      <th scope="col">Details</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-dispute>
+    <tr>
+      <td>{{ dispute["dispute_ID"] }}</td>
+      <td>{{ dispute["pan"] }}</td>
+      <td>{{ dispute["auth_ID"] }}</td>
+      <td>{{ dispute["amount"] }}</td>
+      <td>{{ dispute["DISPUTE_DATE"] }}</td>
+      <td>
+        <a
+          role="button"
+          class="btn btn-secondary"
+          [routerLink]="['/Dispute', dispute['dispute_ID']]"
+          >View Dispute</a
+        >
+      </td>
+    </tr>
+  </ng-template>
+</p-table> -->
+
+<div class="card">
+  <p-multiSelect
+    [options]="cols"
+    [(ngModel)]="selectedCols"
+    defaultLabel="Select a Column"
+  >
+  </p-multiSelect>
+  <p-table
+    #dt2
+    [columns]="selectedCols"
+    [value]="disputes"
+    dataKey="id"
+    [showCurrentPageReport]="true"
+    [loading]="loading"
+    [paginator]="false"
+    styleClass="p-datatable-sm"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="selectedCols"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template pTemplate="caption">
+      <div class="d-flex justify-content-around">
+        <button
+          type="button"
+          pButton
+          pRipple
+          icon="pi pi-file-excel"
+          (click)="exportExcel()"
+          class="p-button-success mr-2"
+          pTooltip="XLS"
+          tooltipPosition="bottom"
+        ></button>
+
+        <span class="p-input-icon-right ml-auto">
+          <input
+            pInputText
+            #searchText
+            type="text"
+            (input)="dt2.filterGlobal(searchText.value, 'contains')"
+            placeholder="Search keyword"
+          />
+          <i class="pi pi-search"></i>
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="col" scope="col" *ngFor="let col of selectedCols">
+          Dispute ID <p-sortIcon field="dispute_ID"></p-sortIcon>
+        </th>
+      </tr>
+      <tr>
+        <th pSortableColumn="dispute_ID" scope="col">
+          Dispute ID <p-sortIcon field="dispute_ID"></p-sortIcon>
+        </th>
+        <th pSortableColumn="pan" scope="col">
+          PAN <p-sortIcon field="pan"></p-sortIcon>
+        </th>
+        <th pSortableColumn="auth_ID" scope="col">
+          Auth ID <p-sortIcon field="auth_ID"></p-sortIcon>
+        </th>
+        <th pSortableColumn="amount" scope="col">
+          Amount <p-sortIcon field="amount"></p-sortIcon>
+        </th>
+        <th pSortableColumn="dispute_DATE" scope="col">
+          Dispute Date <p-sortIcon field="dispute_DATE"></p-sortIcon>
+        </th>
+        <th scope="col">Details</th>
+      </tr>
+      <tr>
+        <th>
+          <p-columnFilter type="text" field="dispute_ID"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="pan"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="auth_ID"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="amount"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="dispute_DATE"></p-columnFilter>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-dispute>
+      <tr>
+        <td>
+          {{ dispute["dispute_ID"] }}
+        </td>
+        <td>
+          {{ dispute["pan"] }}
+        </td>
+        <td>
+          {{ dispute["auth_ID"] }}
+        </td>
+        <td>
+          {{ dispute["amount"] }}
+        </td>
+        <td>
+          {{ dispute["dispute_DATE"] }}
+        </td>
+        <td>
+          <a
+            role="button"
+            class="btn btn-secondary btn-sm"
+            [routerLink]="['/Dispute', dispute['dispute_ID']]"
+            >View Dispute</a
+          >
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="5">No disputes found.</td>
+      </tr>
+    </ng-template>
+    <!-- <ng-template pTemplate="footer" class="p-datatable-footer">
+      <tr>
+        <p-paginator
+          [rows]="rows"
+          [first]="first"
+          [totalRecords]="totalRecords"
+          (onPageChange)="paginate($event)"
+        ></p-paginator>
+      </tr>
+    </ng-template> -->
+  </p-table>
+  <p-footer>
+    <tr>
+      <p-paginator
+        [rows]="rows"
+        [totalRecords]="totalRecords"
+        [rowsPerPageOptions]="rowsPerPageOptions"
+        (onPageChange)="paginate($event)"
+      ></p-paginator>
+    </tr>
+  </p-footer>
+</div>
